@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/Products.css";
 
-interface Product {
+export interface ProductType {
   id: number;
   title: string;
   price: number;
@@ -15,7 +16,7 @@ interface Product {
 }
 
 function Products() {
-  const [products, setProducts] = React.useState<Product[]>([]);
+  const [products, setProducts] = React.useState<ProductType[]>([]);
 
   React.useEffect(() => {
     async function fetchProducts() {
@@ -29,21 +30,25 @@ function Products() {
 
   return (
     <div className="products">
-      {products.map((product: Product) => (
-        <div className="product" key={product.id}>
-          <div className="image-container">
-            <img
-              className="product-image"
-              src={product.image}
-              alt={product.title}
-            />
+      {products.map((product: ProductType) => (
+        <Link to={`/product/${product.id}`} key={product.id}>
+          <div className="product">
+            <div className="image-container">
+              <img
+                className="product-image"
+                src={product.image}
+                alt={product.title}
+              />
+            </div>
+            <div className="product-content">
+              <h3 className="product-title">{product.title}</h3>
+              <p className="product-description truncate">
+                {product.description}
+              </p>
+              <p className="product-price">${product.price}</p>
+            </div>
           </div>
-          <div className="product-content">
-            <h3 className="product-title">{product.title}</h3>
-            <p className="product-description">{product.description}</p>
-            <p className="product-price">${product.price}</p>
-          </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

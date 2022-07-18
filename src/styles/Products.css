@@ -32,6 +32,9 @@
 .product-description {
   font-size: 14px;
   margin-top: 5px;
+}
+
+.truncate {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -43,4 +46,41 @@
   font-weight: 800;
   margin-top: 20px;
   color: rgb(0, 119, 119);
+}
+
+.product-category {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+button {
+  border: none;
+  padding: 15px 20px;
+  width: 100%;
+  text-transform: uppercase;
+  border-radius: 50px;
+}
+
+.buy-button {
+  background: green;
+  color: #fff;
+  margin-top: 20px;
+}
+
+.cancel-button {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid #dbdbdb;
+}
+
+.rating-number {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.rating-component {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
 }
