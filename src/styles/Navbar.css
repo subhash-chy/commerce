@@ -1,0 +1,42 @@
+.nav {
+  background: rgb(230, 230, 230);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.icon-container {
+  position: relative;
+}
+
+.shopping-cart:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+
+.icon-notification {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: red;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+}
