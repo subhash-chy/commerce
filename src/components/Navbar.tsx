@@ -15,7 +15,9 @@ function Navbar() {
       <Link to="/cart">
         <div className="icon-container shopping-cart">
           <ShoppingCartIcon className="icon" />
-          <div className="icon-notification">{products.length}</div>
+          {products.length > 0 && (
+            <div className="icon-notification">{products.length}</div>
+          )}
         </div>
       </Link>
     </nav>

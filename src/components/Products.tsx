@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Products.css";
+import Loader from "./Loader";
 
 export interface ProductType {
   id: number;
@@ -17,19 +18,24 @@ export interface ProductType {
 
 function Products() {
   const [products, setProducts] = React.useState<ProductType[]>([]);
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     async function fetchProducts() {
+      setLoading(true);
       const data = await fetch("https://fakestoreapi.com/products").then(
         (res) => res.json()
       );
       setProducts(data);
+      setLoading(false);
     }
     fetchProducts();
   }, []);
 
   return (
     <div className="products">
+      {loading && <Loader />}
+      {/* <Loader /> */}
       {products.map((product: ProductType) => (
         <Link to={`/product/${product.id}`} key={product.id}>
           <div className="product">

@@ -5,19 +5,23 @@ import { ProductType } from "../components/Products";
 import { Rating } from "react-simple-star-rating";
 import { useAppDispatch } from "../hooks/reduxHook";
 import { addToCart } from "../redux/slices/cartSlice";
+import { Loader } from "../components";
 
 function Product() {
   const dispatch = useAppDispatch();
   const { id } = useParams<string>();
 
   const [product, setProduct] = React.useState<ProductType | undefined>();
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     async function fetchProduct() {
+      setLoading(true);
       const data = await fetch(`https://fakestoreapi.com/products/${id}`).then(
         (res) => res.json()
       );
       setProduct(data);
+      setLoading(false);
     }
     fetchProduct();
   }, [id]);
@@ -28,6 +32,7 @@ function Product() {
 
   return (
     <div className="container">
+      {loading && <Loader />}
       <div className="">
         <div className="image-container">
           <img
