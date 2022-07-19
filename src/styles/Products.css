@@ -45,7 +45,7 @@
   font-size: 25px;
   font-weight: 800;
   margin-top: 20px;
-  color: rgb(0, 119, 119);
+  color: #007777;
 }
 
 .product-category {
@@ -53,24 +53,28 @@
   margin-top: 5px;
 }
 
-button {
-  border: none;
-  padding: 15px 20px;
-  width: 100%;
-  text-transform: uppercase;
-  border-radius: 50px;
-}
-
 .buy-button {
   background: green;
   color: #fff;
   margin-top: 20px;
+  width: 100%;
+  padding: 15px 20px;
+  text-transform: uppercase;
+  border-radius: 5px;
 }
 
 .cancel-button {
   margin-top: 10px;
   background: none;
+  width: 100%;
   border: 1px solid #dbdbdb;
+  padding: 15px 20px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.cancel-button:active {
+  background: #dbdbdb;
 }
 
 .rating-number {

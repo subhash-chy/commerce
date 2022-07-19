@@ -3,21 +3,28 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { ProductType } from "../components/Products";
 import { Rating } from "react-simple-star-rating";
+import { useAppDispatch } from "../hooks/reduxHook";
+import { addToCart } from "../redux/slices/cartSlice";
 
 function Product() {
+  const dispatch = useAppDispatch();
   const { id } = useParams<string>();
 
-  const [product, setProduct] = React.useState<ProductType>();
+  const [product, setProduct] = React.useState<ProductType | undefined>();
 
   React.useEffect(() => {
     async function fetchProduct() {
-      const product = await fetch(
-        `https://fakestoreapi.com/products/${id}`
-      ).then((res) => res.json());
-      setProduct(product);
+      const data = await fetch(`https://fakestoreapi.com/products/${id}`).then(
+        (res) => res.json()
+      );
+      setProduct(data);
     }
     fetchProduct();
   }, [id]);
+
+  const addProduct = (product: any) => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <div className="container">
@@ -48,7 +55,9 @@ function Product() {
             {product?.category}
           </p>
 
-          <button className="buy-button">Add to cart</button>
+          <button className="buy-button" onClick={() => addProduct(product)}>
+            Add to cart
+          </button>
           <button className="cancel-button">Cancel</button>
         </div>
       </div>

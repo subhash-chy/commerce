@@ -15,3 +15,12 @@ a {
 .container {
   padding: 20px 10px;
 }
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+button:active {
+  opacity: 0.8;
+}
