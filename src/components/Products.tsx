@@ -36,7 +36,36 @@ function Products() {
     <div className="products">
       {loading && <Loader />}
       {/* <Loader /> */}
-      {products.map((product: ProductType) => (
+      {products.slice(0, 4).map((product: ProductType) => (
+        <Link to={`/product/${product.id}`} key={product.id}>
+          <div className="product">
+            <div className="image-container">
+              <img
+                className="product-image"
+                src={product.image}
+                alt={product.title}
+              />
+            </div>
+            <div className="product-content">
+              <h3 className="product-title">{product.title}</h3>
+              <p className="product-description truncate">
+                {product.description}
+              </p>
+              <p className="product-price">${product.price}</p>
+            </div>
+          </div>
+        </Link>
+      ))}
+
+      <div className="ad">
+        <img
+          className="ad-image"
+          src="https://images-na.ssl-images-amazon.com/images/G/01/AMAZON_FASHION/2021/CML_Holiday21/Fashion/LANDING_PAGES/headers/CML_HOL21_LP-HEADER_XCAT-M_DT._CB1634600139_.jpg"
+          alt="amazon ad"
+        />
+      </div>
+
+      {products.slice(4, products.length).map((product: ProductType) => (
         <Link to={`/product/${product.id}`} key={product.id}>
           <div className="product">
             <div className="image-container">
