@@ -12,7 +12,7 @@
   height: 3px;
   border-radius: 50%;
   background: #000;
-  animation: myanimation 2s ease-in-out infinite;
+  animation: myanimation 2s ease infinite;
 }
 
 .loader-container > div:nth-child(2) {

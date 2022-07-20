@@ -42,13 +42,14 @@
   margin-top: 10px;
   padding: 5px 10px;
   border-radius: 5px;
-  background: rgba(255, 0, 0, 0.1);
-  color: rgb(255, 0, 0);
+  background: rgba(var(--accent), var(--alpha-background));
+  color: rgb(var(--accent));
+  font-weight: 800;
 }
 
 .cart-total {
-  border-top: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
+  border-top: 1px solid rgba(var(--accent), var(--alpha-background));
+  border-bottom: 1px solid rgba(var(--accent), var(--alpha-background));
   padding: 20px 0;
   font-size: 12px;
   font-weight: 800;
@@ -61,13 +62,13 @@
 }
 
 .total-price {
-  color: green;
+  color: rgb(var(--accent));
   grid-column: span 2 / span 2;
   font-size: 16px;
 }
 
 .checkout-button {
-  background: green;
+  background: rgb(var(--accent));
   color: #fff;
   margin-top: 20px;
   width: 100%;

@@ -5,14 +5,14 @@
 }
 
 .product {
-  background: rgb(228, 234, 234);
+  background: rgba(var(--accent), 0.05);
   margin-bottom: 20px;
   padding: 10px;
   border-radius: 20px;
 }
 
 .image-container {
-  background: white;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,7 +45,7 @@
   font-size: 25px;
   font-weight: 800;
   margin-top: 20px;
-  color: #007777;
+  color: rgb(var(--accent));
 }
 
 .product-category {
@@ -54,7 +54,7 @@
 }
 
 .buy-button {
-  background: green;
+  background: rgb(var(--accent));
   color: #fff;
   margin-top: 20px;
   width: 100%;
@@ -67,14 +67,15 @@
   margin-top: 10px;
   background: none;
   width: 100%;
-  border: 1px solid #dbdbdb;
+  border: 1px solid rgb(var(--accent));
+  color: rgb(var(--accent));
   padding: 15px 20px;
   text-transform: uppercase;
   border-radius: 5px;
 }
 
 .cancel-button:active {
-  background: #dbdbdb;
+  background: rgba(var(--accent), var(--alpha-background));
 }
 
 .rating-number {
