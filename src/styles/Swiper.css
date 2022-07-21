@@ -40,26 +40,6 @@
   object-fit: cover;
 }
 
-/* .swiper-pagination {
-  background: rgba(var(--accent), var(--alpha-background));
-} */
-
-.swiper-pagination-bullet {
-  background: gray;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-}
-
 .swiper-pagination-bullet-active {
   background-color: rgb(var(--accent));
-}
-
-.ad {
-  margin-bottom: 20px;
-}
-
-.ad-image {
-  width: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }

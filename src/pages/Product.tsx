@@ -6,6 +6,7 @@ import { Rating } from "react-simple-star-rating";
 import { useAppDispatch } from "../hooks/reduxHook";
 import { addToCart } from "../redux/slices/cartSlice";
 import { Loader } from "../components";
+import styles from "../styles/products.module.css";
 
 function Product() {
   const dispatch = useAppDispatch();
@@ -34,15 +35,15 @@ function Product() {
     <div className="container">
       {loading && <Loader />}
       <div className="">
-        <div className="image-container">
+        <div className={styles.imageContainer}>
           <img
-            className="product-image"
+            className={styles.image}
             src={product?.image}
             alt={product?.title}
           />
         </div>
-        <div className="product-content">
-          <div className="rating-component">
+        <div className={styles.content}>
+          <div className={styles.ratingComponent}>
             <Rating
               initialValue={0}
               readonly
@@ -50,20 +51,23 @@ function Product() {
               size={20}
               ratingValue={Number(product?.rating.rate) * 20}
             />
-            <p className="rating-number">{product?.rating.rate}/5</p>
+            <p className={styles.ratingNumber}>{product?.rating.rate}/5</p>
           </div>
-          <h3 className="product-title">{product?.title}</h3>
-          <p className="product-description">{product?.description}</p>
-          <p className="product-price">${product?.price}</p>
-          <p className="product-category">
+          <h3 className={styles.title}>{product?.title}</h3>
+          <p className={styles.description}>{product?.description}</p>
+          <p className={styles.price}>${product?.price}</p>
+          <p className={styles.category}>
             <strong>Category: </strong>
             {product?.category}
           </p>
 
-          <button className="buy-button" onClick={() => addProduct(product)}>
+          <button
+            className={styles.buyButton}
+            onClick={() => addProduct(product)}
+          >
             Add to cart
           </button>
-          <button className="cancel-button">Cancel</button>
+          <button className={styles.cancelButton}>Cancel</button>
         </div>
       </div>
     </div>

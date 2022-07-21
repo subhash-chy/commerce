@@ -29,3 +29,10 @@ button {
 button:active {
   opacity: 0.8;
 }
+
+.truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
