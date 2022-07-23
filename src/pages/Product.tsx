@@ -7,69 +7,58 @@ import { useAppDispatch } from "../hooks/reduxHook";
 import { addToCart } from "../redux/slices/cartSlice";
 import { Loader } from "../components";
 import styles from "../styles/products.module.css";
+import useProduct from "../hooks/productsHook";
 
 function Product() {
   const dispatch = useAppDispatch();
   const { id } = useParams<string>();
 
-  const [product, setProduct] = React.useState<ProductType | undefined>();
-  const [loading, setLoading] = React.useState<boolean>(false);
+  const { products } = useProduct(`https://fakestoreapi.com/products/${id}`);
 
-  React.useEffect(() => {
-    async function fetchProduct() {
-      setLoading(true);
-      const data = await fetch(`https://fakestoreapi.com/products/${id}`).then(
-        (res) => res.json()
-      );
-      setProduct(data);
-      setLoading(false);
-    }
-    fetchProduct();
-  }, [id]);
-
-  const addProduct = (product: any) => {
+  const addProduct = (product: ProductType) => {
     dispatch(addToCart(product));
   };
 
   return (
     <div className="container">
-      {loading && <Loader />}
-      <div className="">
-        <div className={styles.imageContainer}>
-          <img
-            className={styles.image}
-            src={product?.image}
-            alt={product?.title}
-          />
-        </div>
-        <div className={styles.content}>
-          <div className={styles.ratingComponent}>
-            <Rating
-              initialValue={0}
-              readonly
-              allowHalfIcon
-              size={20}
-              ratingValue={Number(product?.rating.rate) * 20}
+      <React.Suspense fallback={<Loader />}>
+        <div className="">
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.image}
+              src={products.image}
+              alt={products.title}
             />
-            <p className={styles.ratingNumber}>{product?.rating.rate}/5</p>
           </div>
-          <h3 className={styles.title}>{product?.title}</h3>
-          <p className={styles.description}>{product?.description}</p>
-          <p className={styles.price}>${product?.price}</p>
-          <p className={styles.category}>
-            <strong>Category: </strong>
-            {product?.category}
-          </p>
+          <div className={styles.content}>
+            <div className={styles.ratingComponent}>
+              <Rating
+                initialValue={0}
+                readonly
+                allowHalfIcon
+                size={20}
+                ratingValue={Number(products.rating.rate) * 20}
+              />
+              <p className={styles.ratingNumber}>{products.rating.rate}/5</p>
+            </div>
+            <h3 className={styles.title}>{products.title}</h3>
+            <p className={styles.description}>{products.description}</p>
+            <p className={styles.price}>${products.price}</p>
+            <p className={styles.category}>
+              <strong>Category: </strong>
+              {products.category}
+            </p>
 
-          <button
-            className={styles.buyButton}
-            onClick={() => addProduct(product)}
-          >
-            Add to cart
-          </button>
-          <button className={styles.cancelButton}>Cancel</button>
+            <button
+              className={styles.buyButton}
+              onClick={() => addProduct(products)}
+            >
+              Add to cart
+            </button>
+            <button className={styles.cancelButton}>Cancel</button>
+          </div>
         </div>
-      </div>
+      </React.Suspense>
     </div>
   );
 }

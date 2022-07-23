@@ -1,19 +1,26 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Cart, Home, Product } from "../pages";
-import { Navbar } from "../components";
+import { Home } from "../pages";
+import { Loader, Navbar } from "../components";
 import { Provider } from "react-redux";
 import { store } from "../redux/store";
+import React from "react";
+
+// const Home = React.lazy(() => import("../pages/Home"));
+const Cart = React.lazy(() => import("../pages/Cart"));
+const Product = React.lazy(() => import("../pages/Product"));
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/cart" element={<Cart />}></Route>
-          <Route path="/product/:id" element={<Product />}></Route>
-        </Routes>
+        <React.Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/product/:id" element={<Product />}></Route>
+          </Routes>
+        </React.Suspense>
       </BrowserRouter>
     </Provider>
   );
