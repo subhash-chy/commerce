@@ -93,3 +93,45 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.buttonContainer {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.increaseQtyButton {
+  font-size: 20px;
+  flex-grow: 1;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: 800;
+  background: rgba(var(--success), var(--alpha-background));
+  color: rgb(var(--success));
+}
+
+.quantityContainer {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  /* background: rgb(239, 239, 239); */
+}
+
+.quantity {
+  font-weight: 800;
+}
+
+.decreaseQtyButton {
+  font-size: 20px;
+  flex-grow: 1;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: 800;
+  background: rgba(var(--danger), var(--alpha-background));
+  color: rgb(var(--danger));
+}
