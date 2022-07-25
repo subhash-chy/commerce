@@ -1,6 +1,6 @@
-.heading {
+/* .heading {
   margin-bottom: 20px;
-}
+} */
 
 .productContainer {
   display: grid;
@@ -78,4 +78,18 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+}
+
+.flexer {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clearCartButton {
+  color: rgb(var(--danger));
+  background: rgba(var(--danger), var(--alpha-background));
+  padding: 8px 12px;
+  border-radius: 5px;
 }

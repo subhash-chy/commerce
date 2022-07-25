@@ -1,7 +1,11 @@
 import { useAppSelector, useAppDispatch } from "../hooks/reduxHook";
 import { RootState } from "../redux/store";
 import styles from "../styles/cart.module.css";
-import { increaseQuantity, decreaseQuantity } from "../redux/slices/cartSlice";
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  clearCart,
+} from "../redux/slices/cartSlice";
 
 function Cart() {
   const products = useAppSelector((state: RootState) => state.cart);
@@ -15,7 +19,15 @@ function Cart() {
 
   return (
     <div className="container">
-      <h2 className={styles.heading}>Your cart</h2>
+      <div className={styles.flexer}>
+        <h2 className={styles.heading}>Your cart</h2>
+        <button
+          onClick={() => dispatch(clearCart())}
+          className={styles.clearCartButton}
+        >
+          clear cart
+        </button>
+      </div>
       {products.map((product) => (
         <div key={product.id} className={styles.productContainer}>
           <div className={styles.imageContainer}>
