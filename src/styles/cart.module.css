@@ -35,7 +35,6 @@
 }
 
 .removeButton {
-  margin-top: 10px;
   padding: 5px 10px;
   border-radius: 5px;
   background: rgba(var(--accent), var(--alpha-background));
@@ -71,4 +70,12 @@
   padding: 15px 20px;
   text-transform: uppercase;
   border-radius: 5px;
+}
+
+.buttonContainer {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }

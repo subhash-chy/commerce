@@ -3,6 +3,9 @@
 :root {
   --accent: 249, 86, 7;
   --alpha-background: 0.1;
+
+  --success: 0, 128, 0; /* Green */
+  --danger: 255, 0, 0; /* Red */
 }
 
 * {
