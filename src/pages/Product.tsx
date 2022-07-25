@@ -3,20 +3,43 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { ProductType } from "../components/Products";
 import { Rating } from "react-simple-star-rating";
-import { useAppDispatch } from "../hooks/reduxHook";
-import { addToCart } from "../redux/slices/cartSlice";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "../redux/slices/cartSlice";
 import { Loader } from "../components";
 import styles from "../styles/products.module.css";
 import useProduct from "../hooks/productsHook";
 
 function Product() {
   const dispatch = useAppDispatch();
+  // const navigate = useNavigate();
+
   const { id } = useParams<string>();
 
   const { products } = useProduct(`https://fakestoreapi.com/products/${id}`);
 
+  // const [qty, setQty] = React.useState<number>(0);
+  // products from redux store
+  const productsFromStore = useAppSelector((state) => state.cart);
+  const finQ = (): number => {
+    const index = productsFromStore.findIndex(
+      (product) => product.id === Number(id)
+    );
+    if (productsFromStore.length && index !== -1) {
+      const qty = productsFromStore[index].quantity;
+      return qty;
+    } else {
+      return 0;
+    }
+  };
+  const quantity = finQ();
+
   const addProduct = (product: ProductType) => {
-    dispatch(addToCart(product));
+    const productWithQuantity: ProductType = { ...product, quantity: 1 };
+    dispatch(addToCart(productWithQuantity));
   };
 
   return (
@@ -49,13 +72,38 @@ function Product() {
               {products.category}
             </p>
 
+            {quantity > 0 ? (
+              <div className={styles.buttonContainer}>
+                <button
+                  className={styles.decreaseQtyButton}
+                  onClick={() => dispatch(decreaseQuantity(products.id))}
+                >
+                  -
+                </button>
+                <div className={styles.quantityContainer}>
+                  <p className={styles.quantity}>Qty: {quantity}</p>
+                </div>
+                <button
+                  className={styles.increaseQtyButton}
+                  onClick={() => dispatch(increaseQuantity(products.id))}
+                >
+                  +
+                </button>
+              </div>
+            ) : (
+              <button
+                className={styles.buyButton}
+                onClick={() => addProduct(products)}
+              >
+                Add to cart
+              </button>
+            )}
             <button
-              className={styles.buyButton}
-              onClick={() => addProduct(products)}
+              className={styles.cancelButton}
+              // onClick={() => navigate(-1)}
             >
-              Add to cart
+              Cancel
             </button>
-            <button className={styles.cancelButton}>Cancel</button>
           </div>
         </div>
       </React.Suspense>

@@ -15,7 +15,7 @@ export interface ProductType {
     rate: number;
     count: number;
   };
-  quantity?: number;
+  quantity: number;
 }
 
 function Products() {

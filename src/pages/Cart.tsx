@@ -1,7 +1,7 @@
 import { useAppSelector, useAppDispatch } from "../hooks/reduxHook";
 import { RootState } from "../redux/store";
 import styles from "../styles/cart.module.css";
-import { removeFromCart } from "../redux/slices/cartSlice";
+import { increaseQuantity, decreaseQuantity } from "../redux/slices/cartSlice";
 
 function Cart() {
   const products = useAppSelector((state: RootState) => state.cart);
@@ -9,13 +9,9 @@ function Cart() {
 
   // Calculating total price
   const prices: Array<number> = [0];
-  products.forEach((product) => prices.push(product.price));
+  products.forEach((product) => prices.push(product.price * product.quantity));
 
   const total = prices.reduce((accumulator, current) => accumulator + current);
-
-  const removeProduct = (id: number) => {
-    dispatch(removeFromCart(id));
-  };
 
   return (
     <div className="container">
@@ -35,12 +31,22 @@ function Cart() {
           </div>
           <div className={styles.price}>
             <p>${product.price}</p>
-            <button
-              className={styles.removeButton}
-              onClick={() => removeProduct(product.id)}
-            >
-              Remove
-            </button>
+
+            <div className={styles.buttonContainer}>
+              <button
+                className={styles.removeButton}
+                onClick={() => dispatch(decreaseQuantity(product.id))}
+              >
+                -
+              </button>
+              <p>{product.quantity}</p>
+              <button
+                className={styles.removeButton}
+                onClick={() => dispatch(increaseQuantity(product.id))}
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
       ))}
@@ -48,7 +54,7 @@ function Cart() {
       {products.length > 0 ? (
         <>
           <div className={styles.total}>
-            <p className={styles.totalText}>Total Payable: </p>
+            <p className={styles.totalText}>Total Price: </p>
             <p className={styles.totalPrice}>${Math.ceil(total)}</p>
           </div>
 
