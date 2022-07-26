@@ -119,7 +119,6 @@
   align-items: center;
   justify-content: center;
   padding: 10px 15px;
-  /* background: rgb(239, 239, 239); */
 }
 
 .quantity {
@@ -134,4 +133,43 @@
   font-weight: 800;
   background: rgba(var(--danger), var(--alpha-background));
   color: rgb(var(--danger));
+}
+
+.modalWrapper {
+  z-index: 100;
+  position: fixed;
+  right: 0;
+  left: 0;
+  box-shadow: 4px 4px 20px -1px rgb(0 0 0 / 0.2),
+    2px 2px 5px -2px rgb(0 0 0 / 0.1);
+  margin: 0px 20px;
+}
+
+.modalContainer {
+  color: rgb(var(--success));
+  background: #2a2a2a;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.modalTitle {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.viewCartButton {
+  color: rgb(var(--accent));
+}
+
+.progressBar {
+  height: 5px;
+  background: rgb(var(--success));
+  border-radius: 5px;
+}
+
+.unfocusedContainer {
+  backdrop-filter: opacity(0.4);
 }

@@ -1,6 +1,6 @@
 // Dynamic route
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ProductType } from "../components/Products";
 import { Rating } from "react-simple-star-rating";
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
@@ -16,6 +16,7 @@ import useProduct from "../hooks/productsHook";
 function Product() {
   const dispatch = useAppDispatch();
   // const navigate = useNavigate();
+  const [isModelOpen, setIsModelOpen] = React.useState<boolean>(false);
 
   const { id } = useParams<string>();
 
@@ -24,7 +25,8 @@ function Product() {
   // const [qty, setQty] = React.useState<number>(0);
   // products from redux store
   const productsFromStore = useAppSelector((state) => state.cart);
-  const finQ = (): number => {
+
+  const findQuantity = (): number => {
     const index = productsFromStore.findIndex(
       (product) => product.id === Number(id)
     );
@@ -35,15 +37,34 @@ function Product() {
       return 0;
     }
   };
-  const quantity = finQ();
+  const quantity = findQuantity();
 
   const addProduct = (product: ProductType) => {
+    setIsModelOpen(true);
+
     const productWithQuantity: ProductType = { ...product, quantity: 1 };
     dispatch(addToCart(productWithQuantity));
+
+    setTimeout(() => {
+      setIsModelOpen(false);
+    }, 3000);
   };
 
   return (
-    <div className="container">
+    <div className={`container ${isModelOpen && styles.unfocusedContainer}`}>
+      {isModelOpen && (
+        <div className={styles.modalWrapper}>
+          <div className={styles.modalContainer}>
+            <div className={styles.modalTitle}>
+              <p>Added to cart successfully!!</p>
+              <Link className={styles.viewCartButton} to={"/cart"}>
+                view cart
+              </Link>
+            </div>
+          </div>
+          {/* <div className={styles.progressBar}></div> */}
+        </div>
+      )}
       <React.Suspense fallback={<Loader />}>
         <div className="">
           <div className={styles.imageContainer}>
