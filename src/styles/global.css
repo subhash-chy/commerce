@@ -6,6 +6,8 @@
 
   --success: 0, 128, 0; /* Green */
   --danger: 255, 0, 0; /* Red */
+
+  --ipad: 670px;
 }
 
 * {
@@ -14,6 +16,10 @@
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
 }
+
+/* body {
+  background: #f3f3f3;
+} */
 
 a {
   text-decoration: none;
@@ -38,4 +44,10 @@ button:active {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+@media only screen and (min-width: 670px) {
+  .container {
+    padding: 30px;
+  }
 }

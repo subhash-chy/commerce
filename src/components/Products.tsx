@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import styles from "../styles/products.module.css";
 import Loader from "./Loader";
 import useProduct from "../hooks/productsHook";
+import { Product } from "../components";
 
 export interface ProductType {
   id: number;
@@ -24,25 +25,51 @@ function Products() {
   return (
     <div className={styles.products}>
       <React.Suspense fallback={<Loader />}>
-        {products.slice(0, 4).map((product: ProductType) => (
-          <Link to={`/product/${product.id}`} key={product.id}>
-            <div className={styles.product}>
-              <div className={styles.imageContainer}>
-                <img
-                  className={styles.image}
-                  src={product.image}
-                  alt={product.title}
-                />
-              </div>
-              <div className={styles.content}>
-                <h3 className={styles.title}>{product.title}</h3>
-                <p className={`${styles.description} truncate-3`}>
-                  {product.description}
-                </p>
-                <p className={styles.price}>${product.price}</p>
-              </div>
-            </div>
-          </Link>
+        {products.slice(0, 1).map((product: ProductType) => (
+          <div className={styles.product} key={product.id}>
+            <Product
+              id={product.id}
+              title={product.title}
+              image={product.image}
+              description={product.description}
+              category={product.category}
+              price={product.price}
+              quantity={product.quantity}
+              rating={product.rating}
+            />
+          </div>
+        ))}
+
+        {products.slice(1, 2).map((product: ProductType) => (
+          <div
+            className={`${styles.product} ${styles.dominantProduct}`}
+            key={product.id}
+          >
+            <Product
+              id={product.id}
+              title={product.title}
+              image={product.image}
+              description={product.description}
+              category={product.category}
+              price={product.price}
+              quantity={product.quantity}
+              rating={product.rating}
+            />
+          </div>
+        ))}
+        {products.slice(2, 4).map((product: ProductType) => (
+          <div className={styles.product} key={product.id}>
+            <Product
+              id={product.id}
+              title={product.title}
+              image={product.image}
+              description={product.description}
+              category={product.category}
+              price={product.price}
+              quantity={product.quantity}
+              rating={product.rating}
+            />
+          </div>
         ))}
 
         <div className={styles.ad}>
@@ -53,25 +80,37 @@ function Products() {
           />
         </div>
 
-        {products.slice(4, products.length).map((product: ProductType) => (
-          <Link to={`/product/${product.id}`} key={product.id}>
-            <div className={styles.product}>
-              <div className={styles.imageContainer}>
-                <img
-                  className={styles.image}
-                  src={product.image}
-                  alt={product.title}
-                />
-              </div>
-              <div className={styles.content}>
-                <h3 className={styles.title}>{product.title}</h3>
-                <p className={`${styles.description} truncate-3`}>
-                  {product.description}
-                </p>
-                <p className={styles.price}>${product.price}</p>
-              </div>
-            </div>
-          </Link>
+        {products.slice(4, 5).map((product: ProductType) => (
+          <div
+            className={`${styles.product} ${styles.dominantProduct}`}
+            key={product.id}
+          >
+            <Product
+              id={product.id}
+              title={product.title}
+              image={product.image}
+              description={product.description}
+              category={product.category}
+              price={product.price}
+              quantity={product.quantity}
+              rating={product.rating}
+            />
+          </div>
+        ))}
+
+        {products.slice(5, products.length).map((product: ProductType) => (
+          <div className={styles.product} key={product.id}>
+            <Product
+              id={product.id}
+              title={product.title}
+              image={product.image}
+              description={product.description}
+              category={product.category}
+              price={product.price}
+              quantity={product.quantity}
+              rating={product.rating}
+            />
+          </div>
         ))}
       </React.Suspense>
     </div>

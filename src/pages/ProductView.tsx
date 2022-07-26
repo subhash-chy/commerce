@@ -13,7 +13,7 @@ import { Loader } from "../components";
 import styles from "../styles/products.module.css";
 import useProduct from "../hooks/productsHook";
 
-function Product() {
+function ProductView() {
   const dispatch = useAppDispatch();
   // const navigate = useNavigate();
   const [isModelOpen, setIsModelOpen] = React.useState<boolean>(false);
@@ -132,4 +132,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default ProductView;

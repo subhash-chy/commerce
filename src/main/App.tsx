@@ -7,7 +7,7 @@ import React from "react";
 
 // const Home = React.lazy(() => import("../pages/Home"));
 const Cart = React.lazy(() => import("../pages/Cart"));
-const Product = React.lazy(() => import("../pages/Product"));
+const ProductView = React.lazy(() => import("../pages/ProductView"));
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
-            <Route path="/product/:id" element={<Product />}></Route>
+            <Route path="/product/:id" element={<ProductView />}></Route>
           </Routes>
         </React.Suspense>
       </BrowserRouter>
