@@ -1,6 +1,7 @@
 import { useAppSelector, useAppDispatch } from "../hooks/reduxHook";
 import { RootState } from "../redux/store";
 import styles from "../styles/cart.module.css";
+import { useNavigate } from "react-router-dom";
 import {
   increaseQuantity,
   decreaseQuantity,
@@ -8,6 +9,8 @@ import {
 } from "../redux/slices/cartSlice";
 
 function Cart() {
+  const navigate = useNavigate();
+
   const products = useAppSelector((state: RootState) => state.cart);
   const dispatch = useAppDispatch();
 
@@ -73,7 +76,15 @@ function Cart() {
           <button className={styles.checkoutButton}>Proceed to checkout</button>
         </>
       ) : (
-        <h4>Your cart is empty!</h4>
+        <div className={styles.emptyCartWrapper}>
+          <h4>No shopping yet!</h4>
+          <button
+            onClick={() => navigate("/")}
+            className={styles.continueShoppingButton}
+          >
+            continue shopping
+          </button>
+        </div>
       )}
     </div>
   );

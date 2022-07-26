@@ -92,4 +92,29 @@
   background: rgba(var(--danger), var(--alpha-background));
   padding: 8px 12px;
   border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.emptyCartWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.continueShoppingButton {
+  background: transparent;
+  border: 1px solid rgb(var(--accent));
+  width: 100%;
+  color: rgb(var(--accent));
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.continueShoppingButton:active {
+  background: rgb(var(--accent));
+  opacity: 0.8;
+  color: #fff;
 }
