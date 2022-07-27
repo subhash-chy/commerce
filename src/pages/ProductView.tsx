@@ -3,12 +3,8 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { ProductType } from "../components/Products";
 import { Rating } from "react-simple-star-rating";
-import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
-import {
-  addToCart,
-  decreaseQuantity,
-  increaseQuantity,
-} from "../redux/slices/cartSlice";
+import { useAppDispatch } from "../hooks/reduxHook";
+import { addToCart } from "../redux/slices/cartSlice";
 import { Loader } from "../components";
 import styles from "../styles/products.module.css";
 import useProduct from "../hooks/productsHook";
@@ -22,28 +18,24 @@ function ProductView() {
 
   const { products } = useProduct(`https://fakestoreapi.com/products/${id}`);
 
-  // const [qty, setQty] = React.useState<number>(0);
-  // products from redux store
-  const productsFromStore = useAppSelector((state) => state.cart);
+  const [quantity, setQuantity] = React.useState<number>(1);
+  const [disabledButton, setDisabledButton] = React.useState<boolean>(true);
 
-  const findQuantity = (): number => {
-    const index = productsFromStore.findIndex(
-      (product) => product.id === Number(id)
-    );
-    if (productsFromStore.length && index !== -1) {
-      const qty = productsFromStore[index].quantity;
-      return qty;
+  React.useEffect(() => {
+    if (quantity > 1) {
+      setDisabledButton(false);
     } else {
-      return 0;
+      setDisabledButton(true);
     }
-  };
-  const quantity = findQuantity();
+  }, [quantity]);
 
   const addProduct = (product: ProductType) => {
     setIsModelOpen(true);
 
-    const productWithQuantity: ProductType = { ...product, quantity: 1 };
+    const productWithQuantity: ProductType = { ...product, quantity: quantity };
     dispatch(addToCart(productWithQuantity));
+
+    setQuantity(1);
 
     setTimeout(() => {
       setIsModelOpen(false);
@@ -93,32 +85,32 @@ function ProductView() {
               {products.category}
             </p>
 
-            {quantity > 0 ? (
-              <div className={styles.buttonContainer}>
-                <button
-                  className={styles.decreaseQtyButton}
-                  onClick={() => dispatch(decreaseQuantity(products.id))}
-                >
-                  -
-                </button>
-                <div className={styles.quantityContainer}>
-                  <p className={styles.quantity}>Qty: {quantity}</p>
-                </div>
-                <button
-                  className={styles.increaseQtyButton}
-                  onClick={() => dispatch(increaseQuantity(products.id))}
-                >
-                  +
-                </button>
-              </div>
-            ) : (
+            <div className={styles.buttonContainer}>
               <button
-                className={styles.buyButton}
-                onClick={() => addProduct(products)}
+                disabled={disabledButton}
+                className={styles.decreaseQtyButton}
+                onClick={() => setQuantity(quantity - 1)}
               >
-                Add to cart
+                -
               </button>
-            )}
+              <div className={styles.quantityContainer}>
+                <p className={styles.quantity}>Qty: {quantity}</p>
+              </div>
+              <button
+                className={styles.increaseQtyButton}
+                onClick={() => setQuantity(quantity + 1)}
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              className={styles.buyButton}
+              onClick={() => addProduct(products)}
+            >
+              Add to cart
+            </button>
+
             <button
               className={styles.cancelButton}
               // onClick={() => navigate(-1)}

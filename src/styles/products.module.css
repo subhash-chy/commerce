@@ -139,6 +139,11 @@
   color: rgb(var(--danger));
 }
 
+.decreaseQtyButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 .modalWrapper {
   z-index: 100;
   position: fixed;
