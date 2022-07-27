@@ -1,6 +1,6 @@
 // Dynamic route
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { ProductType } from "../components/Products";
 import { Rating } from "react-simple-star-rating";
 import { useAppDispatch } from "../hooks/reduxHook";
@@ -11,7 +11,7 @@ import useProduct from "../hooks/productsHook";
 
 function ProductView() {
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [isModelOpen, setIsModelOpen] = React.useState<boolean>(false);
 
   const { id } = useParams<string>();
@@ -113,7 +113,7 @@ function ProductView() {
 
             <button
               className={styles.cancelButton}
-              // onClick={() => navigate(-1)}
+              onClick={() => navigate(-1)}
             >
               Cancel
             </button>
