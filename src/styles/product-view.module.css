@@ -1,0 +1,235 @@
+.unfocusedContainer {
+  backdrop-filter: opacity(0.4);
+}
+
+.modalWrapper {
+  z-index: 100;
+  position: fixed;
+  right: 0;
+  left: 0;
+  box-shadow: 4px 4px 20px -1px rgb(0 0 0 / 0.2),
+    2px 2px 5px -2px rgb(0 0 0 / 0.1);
+  margin: 0px 20px;
+}
+
+.modalContainer {
+  color: rgb(var(--success));
+  background: #2a2a2a;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.modalTitle {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.viewCartButton {
+  color: rgb(var(--accent));
+}
+
+.progressBar {
+  height: 5px;
+  background: rgb(var(--success));
+  border-radius: 5px;
+}
+
+.imageContainer {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.image {
+  width: 100px;
+}
+
+.content {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.ratingNumber {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ratingComponent {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 18px;
+}
+
+.description {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.price {
+  font-size: 25px;
+  font-weight: 800;
+  margin-top: 20px;
+  color: rgb(var(--accent));
+}
+
+.category {
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.buttonContainer {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.decreaseQtyButton {
+  font-size: 20px;
+  flex-grow: 1;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: 800;
+  background: rgba(var(--danger), var(--alpha-background));
+  color: rgb(var(--danger));
+}
+
+.decreaseQtyButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.quantityContainer {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+}
+
+.quantity {
+  font-weight: 800;
+}
+
+.increaseQtyButton {
+  font-size: 20px;
+  flex-grow: 1;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: 800;
+  background: rgba(var(--success), var(--alpha-background));
+  color: rgb(var(--success));
+}
+
+.buyButton {
+  background: rgb(var(--accent));
+  color: #fff;
+  margin-top: 20px;
+  width: 100%;
+  padding: 15px 20px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.cancelButton {
+  margin-top: 10px;
+  background: none;
+  width: 100%;
+  border: 1px solid rgb(var(--accent));
+  color: rgb(var(--accent));
+  padding: 15px 20px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.cancelButton:active {
+  background: rgba(var(--accent), var(--alpha-background));
+}
+
+/* ipad air */
+@media only screen and (min-width: 670px) {
+  .imageContainer {
+    height: 300px;
+  }
+
+  .image {
+    width: 180px;
+  }
+
+  .content {
+    margin-top: 25px;
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 25px;
+  }
+
+  .description {
+    margin-top: 15px;
+  }
+
+  .priceCategory {
+    flex: 2;
+  }
+
+  .buttonContainer {
+    margin-top: 20px;
+    flex: 1;
+  }
+
+  .priceQtyWrapper {
+    display: flex;
+  }
+
+  .category {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .buttonWrapper {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+  }
+
+  .buyButton {
+    margin-top: 0;
+  }
+  .cancelButton {
+    margin-top: 0;
+  }
+}
+
+/* ipad pro */
+@media only screen and (min-width: 1024px) {
+  .priceCategory {
+    flex: 3;
+  }
+  .buttonWrapper {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .priceCategory {
+    flex: 5;
+  }
+  .buttonWrapper {
+    width: 30%;
+  }
+}

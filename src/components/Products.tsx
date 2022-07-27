@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styles from "../styles/products.module.css";
 import Loader from "./Loader";
 import useProduct from "../hooks/productsHook";

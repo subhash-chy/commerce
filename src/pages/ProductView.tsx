@@ -6,7 +6,7 @@ import { Rating } from "react-simple-star-rating";
 import { useAppDispatch } from "../hooks/reduxHook";
 import { addToCart } from "../redux/slices/cartSlice";
 import { Loader } from "../components";
-import styles from "../styles/products.module.css";
+import styles from "../styles/product-view.module.css";
 import useProduct from "../hooks/productsHook";
 
 function ProductView() {
@@ -79,44 +79,50 @@ function ProductView() {
             </div>
             <h3 className={styles.title}>{products.title}</h3>
             <p className={styles.description}>{products.description}</p>
-            <p className={styles.price}>${products.price}</p>
-            <p className={styles.category}>
-              <strong>Category: </strong>
-              {products.category}
-            </p>
-
-            <div className={styles.buttonContainer}>
-              <button
-                disabled={disabledButton}
-                className={styles.decreaseQtyButton}
-                onClick={() => setQuantity(quantity - 1)}
-              >
-                -
-              </button>
-              <div className={styles.quantityContainer}>
-                <p className={styles.quantity}>Qty: {quantity}</p>
+            <div className={styles.priceQtyWrapper}>
+              <div className={styles.priceCategory}>
+                <p className={styles.price}>${products.price}</p>
+                <p className={styles.category}>
+                  <strong>Category: </strong>
+                  {products.category}
+                </p>
               </div>
-              <button
-                className={styles.increaseQtyButton}
-                onClick={() => setQuantity(quantity + 1)}
-              >
-                +
-              </button>
+
+              <div className={styles.buttonContainer}>
+                <button
+                  disabled={disabledButton}
+                  className={styles.decreaseQtyButton}
+                  onClick={() => setQuantity(quantity - 1)}
+                >
+                  -
+                </button>
+                <div className={styles.quantityContainer}>
+                  <p className={styles.quantity}>Qty: {quantity}</p>
+                </div>
+                <button
+                  className={styles.increaseQtyButton}
+                  onClick={() => setQuantity(quantity + 1)}
+                >
+                  +
+                </button>
+              </div>
             </div>
 
-            <button
-              className={styles.buyButton}
-              onClick={() => addProduct(products)}
-            >
-              Add to cart
-            </button>
+            <div className={styles.buttonWrapper}>
+              <button
+                className={styles.buyButton}
+                onClick={() => addProduct(products)}
+              >
+                Add to cart
+              </button>
 
-            <button
-              className={styles.cancelButton}
-              onClick={() => navigate(-1)}
-            >
-              Cancel
-            </button>
+              <button
+                className={styles.cancelButton}
+                onClick={() => navigate(-1)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </React.Suspense>
