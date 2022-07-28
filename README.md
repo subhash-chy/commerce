@@ -1,6 +1,6 @@
-# Best view only for mobile device
+# Responsive design
 
-- not optimized for desktop view
+- optimized for mobile, ipad and desktop view
 
 ## Ecommerce app
 

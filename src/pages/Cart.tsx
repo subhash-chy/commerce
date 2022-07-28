@@ -22,15 +22,18 @@ function Cart() {
 
   return (
     <div className="container">
-      <div className={styles.flexer}>
-        <h2 className={styles.heading}>Your cart</h2>
-        <button
-          onClick={() => dispatch(clearCart())}
-          className={styles.clearCartButton}
-        >
-          clear cart
-        </button>
-      </div>
+      {products.length > 0 && (
+        <div className={styles.flexer}>
+          <h2 className={styles.heading}>Your cart</h2>
+
+          <button
+            onClick={() => dispatch(clearCart())}
+            className={styles.clearCartButton}
+          >
+            Empty cart
+          </button>
+        </div>
+      )}
       {products.map((product) => (
         <div key={product.id} className={styles.productContainer}>
           <div className={styles.imageContainer}>
@@ -41,7 +44,7 @@ function Cart() {
             />
           </div>
           <div className={styles.content}>
-            <h5>{product.title}</h5>
+            <h5 className={styles.title}>{product.title}</h5>
             <p className={styles.description}>{product.description}</p>
           </div>
           <div className={styles.price}>
@@ -49,14 +52,14 @@ function Cart() {
 
             <div className={styles.buttonContainer}>
               <button
-                className={styles.removeButton}
+                className={styles.decreaseQtyButton}
                 onClick={() => dispatch(decreaseQuantity(product.id))}
               >
                 -
               </button>
               <p>{product.quantity}</p>
               <button
-                className={styles.removeButton}
+                className={styles.increaseQtyButton}
                 onClick={() => dispatch(increaseQuantity(product.id))}
               >
                 +
@@ -67,14 +70,13 @@ function Cart() {
       ))}
 
       {products.length > 0 ? (
-        <>
+        <div className={styles.priceCheckoutContainer}>
           <div className={styles.total}>
             <p className={styles.totalText}>Total Price: </p>
             <p className={styles.totalPrice}>${Math.ceil(total)}</p>
           </div>
-
           <button className={styles.checkoutButton}>Proceed to checkout</button>
-        </>
+        </div>
       ) : (
         <div className={styles.emptyCartWrapper}>
           <h4>No shopping yet!</h4>
