@@ -3,9 +3,14 @@ import { SearchIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import styles from "../styles/navbar.module.css";
 import { useAppSelector } from "../hooks/reduxHook";
+import { useAuth0 } from "@auth0/auth0-react";
+import { ProductType } from "./Products";
 
 function Navbar() {
-  const products = useAppSelector((state) => state.cart);
+  const { isAuthenticated, isLoading, user, loginWithRedirect, logout } =
+    useAuth0();
+
+  const products: ProductType[] = useAppSelector((state) => state.cart);
   return (
     <nav className={styles.nav}>
       <Link to="/">
@@ -25,6 +30,30 @@ function Navbar() {
           </div>
         </div>
       </div>
+
+      <div className={styles.login}>
+        {isLoading && <p>Loading..</p>}
+        {!user && !isLoading && (
+          <button
+            className={styles.loginButton}
+            onClick={() => loginWithRedirect()}
+          >
+            login
+          </button>
+        )}
+        {!isLoading && user && (
+          <div className={styles.avatarContainer} onClick={() => logout()}>
+            <img
+              src={
+                user?.picture ||
+                "https://w7.pngwing.com/pngs/442/477/png-transparent-computer-icons-user-profile-avatar-profile-heroes-profile-user.png"
+              }
+              alt={user.name}
+            />
+          </div>
+        )}
+      </div>
+
       <Link to="/cart">
         <div className={`${styles.iconContainer} ${styles.shoppingCart}`}>
           <ShoppingCartIcon className={styles.icon} />
