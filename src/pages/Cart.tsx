@@ -20,15 +20,19 @@ function Cart() {
   // Calculating total price
   const prices: Array<number> = [0];
   products.forEach((product) => prices.push(product.price * product.quantity));
-  const total = prices.reduce((accumulator, current) => accumulator + current);
+  const total = Math.trunc(
+    prices.reduce((accumulator, current) => accumulator + current)
+  );
 
   // khalti
   const public_key = import.meta.env.VITE_KHALTI_PUBLIC_KEY;
+  const date = new Date();
   let config = {
     publicKey: public_key,
-    productIdentity: "1234567890",
-    productName: "Drogon",
-    productUrl: "http://gameofthrones.com/buy/Dragons",
+    // Following are only test data
+    productIdentity: date.toDateString(),
+    productName: `From ecommerce buy in ${date}`,
+    productUrl: "http://localhost:5173/product/1",
     eventHandler: {
       onSuccess(payload: ProductType) {
         // hit merchant api for initiating verfication
@@ -108,7 +112,7 @@ function Cart() {
         <div className={styles.priceCheckoutContainer}>
           <div className={styles.total}>
             <p className={styles.totalText}>Total Price: </p>
-            <p className={styles.totalPrice}>${Math.ceil(total)}</p>
+            <p className={styles.totalPrice}>{total}</p>
           </div>
           <button className={styles.checkoutButton} onClick={handleCheckout}>
             Proceed to checkout
