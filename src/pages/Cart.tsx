@@ -12,23 +12,21 @@ import { ProductType } from "../components/Products";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function Cart() {
+  const products = useAppSelector((state: RootState) => state.cart);
+
   const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   const navigate = useNavigate();
 
-  const products = useAppSelector((state: RootState) => state.cart);
   const dispatch = useAppDispatch();
 
   // Calculating total price
   const prices: Array<number> = [0];
   products.forEach((product) => prices.push(product.price * product.quantity));
-
   const total = prices.reduce((accumulator, current) => accumulator + current);
 
-  const public_key = import.meta.env.VITE_KHALTI_PUBLIC_KEY;
-  const secret_key = import.meta.env.KHALTI_SECRET_KEY;
-
   // khalti
+  const public_key = import.meta.env.VITE_KHALTI_PUBLIC_KEY;
   let config = {
     publicKey: public_key,
     productIdentity: "1234567890",
@@ -39,9 +37,7 @@ function Cart() {
         // hit merchant api for initiating verfication
         console.log("Payload => ", payload);
       },
-      // onError handler is optional
       onError(error: Error) {
-        // handle errors
         console.log(error);
       },
       onClose() {
@@ -56,14 +52,11 @@ function Cart() {
       "SCT",
     ],
   };
-
   const checkout = new KhaltiCheckout(config);
   const handleCheckout = () => {
     if (isAuthenticated) {
-      // amount on paisa
       checkout.show({ amount: 1000 });
     } else {
-      localStorage.setItem("products", JSON.stringify(products));
       loginWithRedirect();
     }
   };
@@ -82,6 +75,7 @@ function Cart() {
           </button>
         </div>
       )}
+
       {products.map((product) => (
         <div key={product.id} className={styles.productContainer}>
           <div className={styles.imageContainer}>
