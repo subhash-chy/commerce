@@ -10,6 +10,16 @@
   --ipad: 670px;
 }
 
+::-moz-selection {
+  color: rgb(var(--accent));
+  background: rgba(var(--accent), var(--alpha-background));
+}
+
+::selection {
+  color: rgb(var(--accent));
+  background: rgba(var(--accent), var(--alpha-background));
+}
+
 * {
   margin: 0;
   padding: 0;
