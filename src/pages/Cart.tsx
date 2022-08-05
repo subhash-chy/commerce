@@ -9,12 +9,9 @@ import {
 } from "../redux/slices/cartSlice";
 import KhaltiCheckout from "khalti-checkout-web";
 import { ProductType } from "../components/Products";
-import { useAuth0 } from "@auth0/auth0-react";
 
 function Cart() {
   const products = useAppSelector((state: RootState) => state.cart);
-
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
   const navigate = useNavigate();
 
@@ -54,11 +51,7 @@ function Cart() {
   };
   const checkout = new KhaltiCheckout(config);
   const handleCheckout = () => {
-    if (isAuthenticated) {
-      checkout.show({ amount: 1000 });
-    } else {
-      loginWithRedirect();
-    }
+    checkout.show({ amount: 1000 });
   };
 
   return (

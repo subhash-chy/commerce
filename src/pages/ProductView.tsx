@@ -8,8 +8,11 @@ import { addToCart } from "../redux/slices/cartSlice";
 import { Loader } from "../components";
 import styles from "../styles/product-view.module.css";
 import useProduct from "../hooks/productsHook";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function ProductView() {
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isModelOpen, setIsModelOpen] = React.useState<boolean>(false);
@@ -30,16 +33,23 @@ function ProductView() {
   }, [quantity]);
 
   const addProduct = (product: ProductType) => {
-    setIsModelOpen(true);
+    if (isAuthenticated) {
+      setIsModelOpen(true);
 
-    const productWithQuantity: ProductType = { ...product, quantity: quantity };
-    dispatch(addToCart(productWithQuantity));
+      const productWithQuantity: ProductType = {
+        ...product,
+        quantity: quantity,
+      };
+      dispatch(addToCart(productWithQuantity));
 
-    setQuantity(1);
+      setQuantity(1);
 
-    setTimeout(() => {
-      setIsModelOpen(false);
-    }, 3000);
+      setTimeout(() => {
+        setIsModelOpen(false);
+      }, 3000);
+    } else {
+      loginWithRedirect();
+    }
   };
 
   return (
